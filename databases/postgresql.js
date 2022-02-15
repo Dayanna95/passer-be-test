@@ -7,6 +7,7 @@ postgresql.public.none(`create table users(pk_user integer, name text, status bo
                 insert into users values (123, 'Juan', true);`);
 
 
+
 module.exports = {
     postgresql
 }

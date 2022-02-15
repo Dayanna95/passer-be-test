@@ -4,7 +4,7 @@ const getUser = async (req, res, next) => {
     const { pk_user } = req.params
     try {
         let user = await users.getUser(pk_user)
-        res.status(200).send(user)
+        res.status(200).send(user.name)
         next()
     } catch (e) {
         console.log(e.message)
@@ -15,7 +15,7 @@ const getUser = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     const { pk_user, name } = req.body
     try {
-        let user = await users.createUser(pk_user, name)
+        let user = users.createUser(pk_user, name)
         res.status(200).send(user)
         next()
     } catch (e) {
@@ -32,6 +32,25 @@ const updateUser = async (req,res,next) => { //endpoint que actualiza datos
     try{
         
         let user = users.updateUser(pk_user, name, status)
+        res.status(200).send(user)
+        next()
+
+    } catch (e){
+        console.log(e.message)
+        res.sendStatus(500) && next(e)
+    }
+
+}
+
+const deleteUser = async (req,res,next) => { //endpoint que elimina datos
+    
+    const {pk_user} = req.params
+    
+    try{        
+        let user = users.deleteUser(pk_user)
+        res.status(200).send(user.pk_user)
+        next()
+       
 
     } catch (e){
         console.log(e.message)
@@ -43,5 +62,6 @@ const updateUser = async (req,res,next) => { //endpoint que actualiza datos
 module.exports = {
     getUser,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 }

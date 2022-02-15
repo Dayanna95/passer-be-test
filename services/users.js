@@ -7,7 +7,7 @@ const usersModel = require('../models/users')
  */
 const getUser = async (pk_user) => {
     try {
-        return await usersModel.getUser(pk_user)
+        return await usersModel.getUser(pk_user).name
     } catch (e) {
         throw new Error(e.message)
     }
@@ -42,9 +42,23 @@ const updateUser = async (pk_user, name, status) => {
 }
 
 
+/**
+ * Delete an user
+ * @param {number} pk_user User id
+ */
+ const deleteUser = async (pk_user) => {
+    try {
+        return usersModel.deleteUser(pk_user)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+
 
 module.exports = {
     getUser,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
