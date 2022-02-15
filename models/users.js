@@ -8,7 +8,7 @@ const { postgresql } = require('../databases/postgresql')
  */
 const createUser = (pk_user, name) => {
     try {
-        let user = postgresql.public.one(`insert into users values ('${pk_user}', '${name}', status) returning *;`);
+        let user = postgresql.public.one(`insert into users (pk_user,name,status) values ('${pk_user}', '${name}', 'true') returning *;`);
         return user
     }
     catch (e) {
@@ -22,7 +22,14 @@ const createUser = (pk_user, name) => {
  * @param {string} name User name
  * @returns {{pk_user: 1, name: "Juan"}}
  */
-const updateUser = (pk_user, name) => {
+const updateUser = (pk_user, name, status) => {
+    try{
+        let  user = postgresql.public.one(`update users set name = '${name}', status = '${status}' where pk_user = '${pk_user}' returning *;`);
+        return user         
+
+    } catch (e) {
+         throw new Error(e)
+    }
 
     throw new Error('Method not implemented.');
 }
@@ -50,5 +57,6 @@ const deleteUser = (pk_user) => {
 
 module.exports = {
     createUser,
-    getUser
+    getUser,
+    updateUser
 }
