@@ -30,8 +30,6 @@ const updateUser = (pk_user, name, status) => {
     } catch (e) {
          throw new Error(e)
     }
-
-    throw new Error('Method not implemented.');
 }
 
 /**
