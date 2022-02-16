@@ -7,7 +7,7 @@ const usersModel = require('../models/users')
  */
 const getUser = async (pk_user) => {
     try {
-        return await usersModel.getUser(pk_user).name
+        return await usersModel.getUser(pk_user)
     } catch (e) {
         throw new Error(e.message)
     }
