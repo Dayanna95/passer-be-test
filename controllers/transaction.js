@@ -13,7 +13,7 @@ const createTransaction = async (req, res, next) => {//endpoint para crear nueva
     }
 }
 
-const getTransaction = async (req, res, next) => {
+const getTransaction = async (req, res, next) => {//endpoint que trae la transaccion de acuerdo a su id
     const { pk_transaction } = req.params
     try {
         let transactions = await transaction.getTransaction(pk_transaction)
@@ -43,8 +43,21 @@ const updateTransaction = async (req,res,next) => { //endpoint que actualiza dat
 
 }
 
+const getTransactions = async (req, res, next) => {//endpoint que trae las transacciones por usuario
+    const { fk_user } = req.params
+    try {
+        let transactions = await transaction.getTransactions(fk_user)
+        res.status(200).send(transactions)
+        next()
+    } catch (e) {
+        console.log(e.message)
+        res.sendStatus(500) && next(e)
+    }
+}
+
 module.exports = {
    createTransaction,
    getTransaction,
-   updateTransaction
+   updateTransaction,
+   getTransactions
 }

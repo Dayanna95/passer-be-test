@@ -17,6 +17,14 @@ const getTransaction = async (pk_transaction) => {
     }
 }
 
+const getTransactions = async (fk_user) => {
+    try {
+        return await transactionModel.getTransactions(fk_user)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 const updateTransaction = async (pk_transaction,fk_user,description, amount) => {
     try {
         return transactionModel.updateTransaction(pk_transaction,fk_user,description, amount)
@@ -29,5 +37,6 @@ const updateTransaction = async (pk_transaction,fk_user,description, amount) => 
 module.exports = {
     createTransaction ,
     getTransaction ,
-    updateTransaction
+    updateTransaction,
+    getTransactions
 }

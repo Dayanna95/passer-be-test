@@ -21,6 +21,12 @@ const createTransaction = (pk_transaction,fk_user, description,amount) => {
     return transaccion
 }
 
+const getTransactions = (fk_user) => {
+
+    let transaccion = postgresql.public.one(`select * from transaction where fk_user = '${fk_user}'`);
+    return transaccion
+}
+
 const updateTransaction = (pk_transaction,fk_user, description,amount) => {
     try{
         let  user = postgresql.public.one(`update transaction set fk_user = '${fk_user}', description = '${description}', amount = '${amount}' where pk_transaction = '${pk_transaction}' returning *;`);
@@ -35,6 +41,7 @@ const updateTransaction = (pk_transaction,fk_user, description,amount) => {
 module.exports = {
     createTransaction,
     getTransaction,
-    updateTransaction
+    updateTransaction,
+    getTransactions
     
 }
