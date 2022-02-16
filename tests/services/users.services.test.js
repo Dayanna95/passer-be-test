@@ -21,7 +21,7 @@ describe('users main functions', () => {
 
      // deleteUser function test
      test('deleteUser with {pk_user: 123}', async () => {
-        let user = await users.deleteUser(123)
+        let user = await users.deleteUser(5)
         expect(user.pk_user).toBe(123);
     });
 })
