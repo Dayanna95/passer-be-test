@@ -25,7 +25,26 @@ const getTransaction = async (req, res, next) => {
     }
 }
 
+const updateTransaction = async (req,res,next) => { //endpoint que actualiza datos
+    
+    const {pk_transaction} = req.params
+    const {fk_user, description,amount} = req.body
+
+    try{
+        
+        let transaccions = transaction.updateTransaction(pk_transaction,fk_user, description,amount)
+        res.status(200).send(transaccions)
+        next()
+
+    } catch (e){
+        console.log(e.message)
+        res.sendStatus(500) && next(e)
+    }
+
+}
+
 module.exports = {
    createTransaction,
-   getTransaction
+   getTransaction,
+   updateTransaction
 }

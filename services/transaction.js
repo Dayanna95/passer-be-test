@@ -17,8 +17,17 @@ const getTransaction = async (pk_transaction) => {
     }
 }
 
+const updateTransaction = async (pk_transaction,fk_user,description, amount) => {
+    try {
+        return transactionModel.updateTransaction(pk_transaction,fk_user,description, amount)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 
 module.exports = {
     createTransaction ,
-    getTransaction  
+    getTransaction ,
+    updateTransaction
 }
